@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Скай Алтай — шоурум номеров</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Шоурум: сетка типов номеров → просмотр всех фото с параметрами → сравнение рядом. Цвета те же, что на сайте. */
+:root{
+  --river:#1F8A8A; --river-d:#17706F; --pine:#1F4D3C; --amber:#E39B2F; --snow:#F5F8F7; --coal:#1E2622;
+  --muted:#5B655F; --line:#D9E1DD; --night:#14221C;
+  --head:'Unbounded','Manrope',sans-serif; --body:'Manrope',Arial,sans-serif; color-scheme:light;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--snow);color:var(--coal);font-family:var(--body);line-height:1.5;padding-bottom:90px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+h1{font-family:var(--head);font-weight:700;font-size:clamp(26px,4vw,40px);line-height:1.15;text-wrap:balance}
+.bar{background:#fff;border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:8px 22px;min-height:84px;flex-wrap:wrap}
+.bar .logo img{height:64px;width:auto;display:block}
+.bar .logo{margin-right:auto}
+.bar nav{display:flex;gap:18px;font-weight:700;font-size:14px}
+.bar nav a{text-decoration:none}.bar nav a[aria-current]{color:var(--river)}
+.demo{background:#FFF1D6;color:#6B4400;font-size:13px;font-weight:600;padding:8px 0;text-align:center}
+.intro{padding:30px 0 14px}
+.intro p{color:var(--muted);max-width:66ch;margin-top:8px}
+.filters{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:12px 0 20px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font:inherit;font-weight:800;font-size:13px;border:1.5px solid var(--line);background:#fff;color:var(--muted);border-radius:99px;padding:8px 14px;cursor:pointer;min-height:40px}
+.chips button[aria-pressed="true"]{background:var(--pine);border-color:var(--pine);color:#fff}
+.filters label{font-size:13px;font-weight:800;color:var(--muted);display:flex;gap:8px;align-items:center}
+.filters select{font:inherit;font-weight:700;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;min-height:40px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s ease,box-shadow .35s ease}
+.card:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(31,77,60,.18)}
+.card[hidden]{display:none}
+.ph{position:relative;overflow:hidden;aspect-ratio:3/2;background:#DDE6E3;border:0;padding:0;cursor:zoom-in;display:block;width:100%}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.card:hover .ph img{transform:scale(1.06)}
+.badge{position:absolute;left:10px;top:10px;font-size:12px;font-weight:800;border-radius:99px;padding:4px 10px;background:#fff;color:var(--pine);box-shadow:0 1px 6px rgba(0,0,0,.2)}
+.badge.s{background:#FFF1D6;color:#7A4A00}
+.cnt{position:absolute;right:10px;bottom:10px;background:rgba(20,34,28,.85);color:#fff;border-radius:10px;padding:4px 10px;font-size:12px;font-weight:800}
+.body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.body h2{font-family:var(--head);font-weight:500;font-size:18px}
+.price{font-family:var(--head);font-weight:500;font-size:17px;color:var(--river)}
+.facts{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13.5px;color:var(--muted)}
+.facts span{display:inline-flex;gap:5px;align-items:center}
+.facts svg{width:16px;height:16px;color:var(--river)}
+.acts{display:flex;gap:8px;margin-top:auto;align-items:center}
+.btn{font:inherit;font-weight:800;font-size:14px;border:0;border-radius:12px;padding:11px 16px;cursor:pointer;text-decoration:none;display:inline-block;text-align:center;min-height:44px}
+.btn.p{background:var(--river);color:#fff;flex:1}.btn.p:hover{background:var(--river-d)}
+.btn.g{background:#EEF4F3;color:var(--pine)}
+.cmp{display:flex;gap:6px;align-items:center;font-size:13px;font-weight:800;color:var(--muted);cursor:pointer;margin-left:auto}
+.cmp input{width:20px;height:20px;accent-color:var(--river)}
+
+/* просмотр */
+.ov{position:fixed;inset:0;z-index:50;background:rgba(10,20,16,.78);display:none;align-items:center;justify-content:center;padding:14px}
+.ov.on{display:flex;animation:fade .25s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.view{background:#fff;border-radius:22px;max-width:1180px;width:100%;max-height:calc(100vh - 28px);overflow:auto;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);animation:pop .35s cubic-bezier(.2,.8,.3,1) both}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:860px){.view{grid-template-columns:1fr}}
+.stage{background:#0f1a15;position:relative}
+.frame{position:relative;aspect-ratio:3/2;overflow:hidden;touch-action:pan-y}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .5s ease}
+.frame img.on{opacity:1}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:24px;cursor:pointer;color:var(--pine);z-index:3;transition:transform .2s}
+.nav:hover{transform:translateY(-50%) scale(1.1)}
+.nav.l{left:10px}.nav.r{right:10px}
+.count{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.6);color:#fff;font-size:12.5px;font-weight:800;border-radius:10px;padding:4px 10px;z-index:3}
+.thumbs{display:flex;gap:6px;overflow-x:auto;padding:8px;background:#0f1a15}
+.thumbs button{flex:none;width:72px;height:52px;border:2px solid transparent;border-radius:8px;padding:0;overflow:hidden;cursor:pointer;opacity:.6;background:#222;transition:opacity .2s,transform .2s}
+.thumbs button:hover{opacity:.9}
+.thumbs button[aria-current="true"]{border-color:var(--amber);opacity:1;transform:translateY(-2px)}
+.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.info{padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+.info h2{font-family:var(--head);font-weight:500;font-size:22px}
+.info .price{font-size:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;list-style:none;padding:0}
+.stats li{background:#EAF5F4;border-radius:14px;padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--pine)}
+.stats svg{width:24px;height:24px}.stats b{font-family:var(--head);font-weight:500;font-size:15px;color:var(--coal)}.stats span{font-size:11.5px;color:var(--muted)}
+.feat{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.feat li{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:5px 11px 5px 8px;font-size:13px;font-weight:600}
+.feat svg{width:16px;height:16px;color:var(--river);flex:none}
+.feat li.hl{background:#DDF1F0;border-color:#B6DCDA;color:#0F5958}
+.extra{display:flex;gap:8px;align-items:center;font-size:13.5px;background:#FFF6E0;border-radius:12px;padding:9px 12px;color:#6B4400}
+.extra svg{width:18px;height:18px;flex:none}
+.soon{font-size:13px;color:var(--muted);border:1.5px dashed var(--line);border-radius:12px;padding:10px 12px}
+.close{position:absolute;right:12px;top:12px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);font-size:22px;cursor:pointer;z-index:4;color:var(--coal)}
+.close:hover{background:#fff;transform:rotate(90deg)}
+.close{transition:transform .3s}
+
+/* сравнение */
+.cbar{position:fixed;left:50%;bottom:16px;transform:translate(-50%,140%);z-index:40;background:var(--pine);color:#fff;border-radius:16px;padding:10px 12px 10px 18px;display:flex;gap:14px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.3);transition:transform .45s cubic-bezier(.2,.9,.3,1.2);max-width:calc(100vw - 24px)}
+.cbar.on{transform:translate(-50%,0)}
+.cbar b{font-weight:800;font-size:14px}
+.cbar .btn{background:var(--amber);color:#2A1A05;min-height:40px;padding:8px 14px}
+.cbar .btn:disabled{opacity:.45;cursor:not-allowed}
+.cbar .x{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);min-height:40px;padding:8px 12px}
+.cmpbox{background:#fff;border-radius:22px;max-width:1000px;width:100%;max-height:calc(100vh - 28px);overflow:auto;padding:20px;position:relative;animation:pop .35s cubic-bezier(.2,.8,.3,1) both}
+.cmpbox h2{font-family:var(--head);font-weight:500;font-size:20px;margin-bottom:12px;padding-right:50px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+th,td{padding:9px 10px;border-bottom:1px solid #EEF1EF;text-align:left;vertical-align:middle}
+th{color:var(--muted);font-weight:700;width:150px}
+td.h{padding-bottom:12px}td.h img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;display:block;margin-bottom:6px}
+td.h b{font-family:var(--head);font-weight:500;font-size:15px}
+tr.diff td{background:#F3FAF9;font-weight:700}
+.tw{overflow-x:auto}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*90ms)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.cbar{transform:translate(-50%,0)}.cbar:not(.on){display:none}}
+</style>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="logo" href="site.html" aria-label="Скай Алтай, на сайт"><img src="photos/logo-pine.png" alt="Скай Алтай"></a>
+  <nav aria-label="Разделы"><a href="site.html">Сайт</a><a href="rooms.html" aria-current="page">Шоурум</a><a href="book.html">Забронировать</a></nav>
+</div></header>
+<div class="demo">Демо: фото и параметры взяты с sky-altai.ru, 360° и видео добавим после съёмки.</div>
+
+<main class="wrap">
+  <div class="intro">
+    <h1>Шоурум номеров</h1>
+    <p>Все пять типов номеров с полными фотографиями. Нажмите на фото, чтобы листать, а отметка «Сравнить» покажет номера рядом.</p>
+  </div>
+  <div class="filters">
+    <div class="chips" role="group" aria-label="Сезон">
+      <button type="button" data-s="all" aria-pressed="true">Все</button>
+      <button type="button" data-s="year" aria-pressed="false">Круглый год</button>
+      <button type="button" data-s="summer" aria-pressed="false">Апрель–октябрь</button>
+    </div>
+    <label>Гостей <select id="gsel"><option value="0">любое число</option><option>2</option><option>3</option><option>4</option><option>5</option></select></label>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="cbar" id="cbar" role="region" aria-label="Сравнение номеров"><b id="cnum">Сравнить: 0</b><button class="btn" id="cgo" type="button" disabled>Сравнить номера</button><button class="btn x" id="cclr" type="button">Сбросить</button></div>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="vt"></div>
+<div class="ov" id="ov2" role="dialog" aria-modal="true" aria-label="Сравнение номеров"></div>
+
+<script src="fx.js"></script>
+<script>
+/* данные взяты с sky-altai.ru и от владельцев; photos — сколько фото в галерее, cover — какое фото главное (как на сайте) */
+var ROOMS = [
+  {slug:'bereg', name:'Дом на берегу', price:7000, extra:1, area:25, rooms:1, season:'summer', count:1, photos:7, cover:1},
+  {slug:'semeynyi', name:'Дом Семейный', price:10000, extra:3, area:40, rooms:2, season:'year', count:1, photos:10, cover:1},
+  {slug:'dvuhkomnatnyi', name:'2-х комнатный', price:6000, extra:2, area:30, rooms:2, season:'year', count:2, photos:8, cover:5},
+  {slug:'studiya', name:'Студия', price:6000, extra:1, area:30, rooms:1, season:'summer', winter:1, count:2, photos:6, cover:2},
+  {slug:'standart', name:'Стандарт', price:5000, extra:2, area:25, rooms:1, season:'summer', count:2, photos:6, cover:2}
+];
+ROOMS.forEach(function(r){ r.guests = 2 + r.extra; });
+var S = function(d){ return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; };
+var IC = {
+  area:S('<path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/>'),
+  rooms:S('<path d="M6 3h9v18H6z"/><path d="M15 7h3v14h-3"/><circle cx="12" cy="12" r=".9"/>'),
+  guests:S('<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.9.3 5 2.6 5 5.8"/>'),
+  terrace:S('<circle cx="12" cy="7.5" r="3.2"/><path d="M3 20h18M5 20v-4h14v4M8 16v4M16 16v4"/>'),
+  river:S('<path d="M3 9c2 0 2-2 4.5-2S10 9 12 9s2.5-2 4.5-2S19 9 21 9M3 15c2 0 2-2 4.5-2S10 15 12 15s2.5-2 4.5-2S19 15 21 15"/>'),
+  kitchen:S('<path d="M5 10h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M3 10h18M9 6.5c0-1.5 1-2 1-3.5M14 6.5c0-1.5 1-2 1-3.5"/>'),
+  bed:S('<path d="M3 19V7M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.5 9H11v6"/><circle cx="7" cy="11.5" r="1.7"/>'),
+  nosmoke:S('<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8M8 13h5"/>'),
+  plus:S('<path d="M12 5v14M5 12h14"/>')
+};
+function money(n){ return n.toLocaleString('ru-RU') + ' ₽'; }
+function plural(n,a,b,c){ var m = n % 10, t = n % 100; return (m === 1 && t !== 11) ? a : (m >= 2 && m <= 4 && (t < 12 || t > 14)) ? b : c; }
+function wcount(r){ return r.season === 'year' ? r.count : (r.winter || 0); }
+function badgeText(r){ var w = wcount(r); return w === r.count ? 'Круглый год' : (w ? 'Зимой: ' + w + ' из ' + r.count : 'Апрель–октябрь'); }
+function seasonText(r){ var w = wcount(r); return w === r.count ? 'Круглый год' : (w ? 'Круглый год — ' + w + ' из ' + r.count + ', остальные апрель–октябрь' : 'Апрель–октябрь'); }
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function photoUrl(r,i){ return 'photos/rooms/' + r.slug + '/' + pad2(i) + '.jpg'; }
+/* порядок фото: сначала главное, как на сайте, затем остальные */
+function order(r){ var a = [r.cover]; for (var i = 1; i <= r.photos; i++) if (i !== r.cover) a.push(i); return a; }
+function byslug(s){ return ROOMS.filter(function(r){ return r.slug === s; })[0]; }
+
+/* ── сетка ── */
+var filt = {s:'all', g:0}, picked = [];
+function renderGrid(){
+  var g = document.getElementById('grid'); g.textContent = '';
+  ROOMS.forEach(function(r, idx){
+    var el = document.createElement('article'); el.className = 'card'; el.dataset.slug = r.slug; el.setAttribute('data-rv', idx);
+    var cover = photoUrl(r, r.cover);
+    el.innerHTML =
+      '<button class="ph" type="button" aria-label="Смотреть фото: ' + r.name + '"><img src="' + cover + '" alt="' + r.name + '" loading="lazy">' +
+      '<span class="badge' + (wcount(r) < r.count ? ' s' : '') + '">' + badgeText(r) + '</span><span class="cnt">' + r.photos + ' фото</span></button>' +
+      '<div class="body"><h2>' + r.name + '</h2><div class="price">от ' + money(r.price) + ' за сутки</div>' +
+      '<div class="facts"><span>' + IC.area + r.area + ' м²</span><span>' + IC.rooms + r.rooms + ' ' + plural(r.rooms,'комната','комнаты','комнат') + '</span><span>' + IC.guests + 'до ' + r.guests + ' гостей</span></div>' +
+      '<div class="acts"><button class="btn p" type="button" data-open>Смотреть номер</button>' +
+      '<label class="cmp"><input type="checkbox" data-cmp aria-label="Сравнить ' + r.name + '"' + (picked.indexOf(r.slug) >= 0 ? ' checked' : '') + '>Сравнить</label></div></div>';
+    g.appendChild(el);
+  });
+  g.querySelectorAll('.card').forEach(function(el){
+    var slug = el.dataset.slug;
+    el.querySelector('.ph').addEventListener('click', function(){ openView(slug); });
+    el.querySelector('[data-open]').addEventListener('click', function(){ openView(slug); });
+    el.querySelector('[data-cmp]').addEventListener('change', function(e){ toggleCmp(slug, e.target.checked); });
+  });
+  FX.reveal(g); applyFilter();
+}
+function applyFilter(){
+  document.querySelectorAll('.card').forEach(function(el){
+    var r = byslug(el.dataset.slug);
+    var w = wcount(r), okS = filt.s === 'all' || (filt.s === 'year' ? w > 0 : w < r.count);
+    var okG = !filt.g || r.guests >= filt.g;
+    el.hidden = !(okS && okG);
+  });
+}
+document.querySelectorAll('.chips button').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.chips button').forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+    b.setAttribute('aria-pressed','true'); filt.s = b.dataset.s; applyFilter();
+  });
+});
+document.getElementById('gsel').addEventListener('change', function(e){ filt.g = +e.target.value; applyFilter(); });
+
+/* ── просмотр ── */
+var cur = null, idx = 0, layer = 'a', lastFocus = null;
+function openView(slug, startAt){
+  cur = byslug(slug); idx = startAt || 0; lastFocus = document.activeElement;
+  var r = cur, ov = document.getElementById('ov');
+  var thumbs = order(r).map(function(n, i){ return '<button type="button" data-i="' + i + '" aria-label="Фото ' + (i + 1) + '"><img src="' + photoUrl(r, n) + '" alt="" loading="lazy"></button>'; }).join('');
+  ov.innerHTML =
+    '<div class="view"><div class="stage"><button class="close" type="button" aria-label="Закрыть">×</button>' +
+    '<div class="frame" id="frame"><img id="la" alt=""><img id="lb" alt=""><button class="nav l" type="button" aria-label="Предыдущее фото">‹</button><button class="nav r" type="button" aria-label="Следующее фото">›</button><span class="count" id="cnt2"></span></div>' +
+    '<div class="thumbs" id="thumbs">' + thumbs + '</div></div>' +
+    '<div class="info"><h2 id="vt">' + r.name + '</h2><div class="price">от ' + money(r.price) + ' за сутки</div>' +
+    '<ul class="stats"><li>' + IC.area + '<b>' + r.area + ' м²</b><span>площадь</span></li><li>' + IC.rooms + '<b>' + r.rooms + '</b><span>' + plural(r.rooms,'комната','комнаты','комнат') + '</span></li><li>' + IC.guests + '<b>до ' + r.guests + '</b><span>гостей</span></li></ul>' +
+    '<ul class="feat"><li class="hl">' + IC.terrace + 'Своя терраса</li><li class="hl">' + IC.river + 'Вид на реку</li><li>' + IC.kitchen + 'Кухня</li><li>' + IC.bed + 'Кровать 2-х местная</li><li>' + IC.nosmoke + 'Для некурящих</li></ul>' +
+    '<p class="extra">' + IC.plus + '<span>Доп. место: 700 ₽ за сутки (можно до ' + r.extra + ')</span></p>' +
+    '<p class="facts"><span><b>' + seasonText(r) + '</b></span>' + (r.count > 1 ? '<span>Таких номеров: ' + r.count + '</span>' : '') + '</p>' +
+    '<a class="btn p" href="book.html?type=' + r.slug + '">Свободные даты</a>' +
+    '<button class="btn g" type="button" id="vc">' + (picked.indexOf(r.slug) >= 0 ? 'Убрать из сравнения' : 'Добавить к сравнению') + '</button>' +
+    '<p class="soon">Скоро: 360°-вид с террасы на реку и короткое видео номера. Добавим после съёмки.</p></div></div>';
+  ov.classList.add('on'); document.body.style.overflow = 'hidden';
+  ov.querySelector('.close').addEventListener('click', closeView);
+  ov.querySelector('.nav.l').addEventListener('click', function(){ go(-1); });
+  ov.querySelector('.nav.r').addEventListener('click', function(){ go(1); });
+  ov.querySelector('#thumbs').addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) show(+b.dataset.i); });
+  ov.querySelector('#vc').addEventListener('click', function(e){ toggleCmp(r.slug, picked.indexOf(r.slug) < 0); e.target.textContent = picked.indexOf(r.slug) >= 0 ? 'Убрать из сравнения' : 'Добавить к сравнению'; });
+  swipe(ov.querySelector('#frame'));
+  layer = 'a'; show(idx, true); ov.querySelector('.close').focus();
+}
+function show(i, first){
+  var list = order(cur); idx = (i + list.length) % list.length;
+  var a = document.getElementById('la'), b = document.getElementById('lb');
+  var next = layer === 'a' ? b : a, old = layer === 'a' ? a : b;
+  var url = photoUrl(cur, list[idx]);
+  next.onload = function(){ next.classList.add('on'); if (!first) old.classList.remove('on'); layer = (next === a) ? 'a' : 'b'; };
+  next.src = url; next.alt = cur.name + ', фото ' + (idx + 1);
+  if (first){ old.classList.remove('on'); }
+  document.getElementById('cnt2').textContent = (idx + 1) + ' / ' + list.length;
+  document.querySelectorAll('#thumbs button').forEach(function(t, k){
+    if (k === idx){ t.setAttribute('aria-current','true'); t.scrollIntoView({inline:'center', block:'nearest', behavior: FX.reduce ? 'auto' : 'smooth'}); } else t.removeAttribute('aria-current');
+  });
+  new Image().src = photoUrl(cur, list[(idx + 1) % list.length]);   // заранее грузим следующее
+}
+function go(d){ show(idx + d); }
+function swipe(el){
+  var x0 = null;
+  el.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  el.addEventListener('touchend', function(e){ if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); x0 = null; });
+}
+function closeView(){
+  var ov = document.getElementById('ov'); ov.classList.remove('on'); ov.textContent = ''; document.body.style.overflow = '';
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+document.addEventListener('keydown', function(e){
+  var ov = document.getElementById('ov'), ov2 = document.getElementById('ov2');
+  if (e.key === 'Escape'){ if (ov2.classList.contains('on')) closeCmp(); else if (ov.classList.contains('on')) closeView(); }
+  if (ov.classList.contains('on') && !ov2.classList.contains('on')){ if (e.key === 'ArrowLeft') go(-1); if (e.key === 'ArrowRight') go(1); }
+});
+document.getElementById('ov').addEventListener('click', function(e){ if (e.target === e.currentTarget) closeView(); });
+document.getElementById('ov2').addEventListener('click', function(e){ if (e.target === e.currentTarget) closeCmp(); });
+
+/* ── сравнение ── */
+function toggleCmp(slug, on){
+  var i = picked.indexOf(slug);
+  if (on && i < 0){ picked.push(slug); if (picked.length > 3) picked.shift(); }
+  if (!on && i >= 0) picked.splice(i, 1);
+  document.querySelectorAll('[data-cmp]').forEach(function(c){ c.checked = picked.indexOf(c.closest('.card').dataset.slug) >= 0; });
+  var bar = document.getElementById('cbar');
+  document.getElementById('cnum').textContent = 'Сравнить: ' + picked.length + ' из 3';
+  document.getElementById('cgo').disabled = picked.length < 2;
+  bar.classList.toggle('on', picked.length > 0);
+}
+document.getElementById('cclr').addEventListener('click', function(){ picked.length = 0; toggleCmp('', false); });
+document.getElementById('cgo').addEventListener('click', function(){
+  var rs = picked.map(byslug), ov2 = document.getElementById('ov2');
+  var rows = [
+    ['Цена за сутки, от', function(r){ return money(r.price); }],
+    ['Площадь', function(r){ return r.area + ' м²'; }],
+    ['Комнат', function(r){ return r.rooms; }],
+    ['Гостей всего', function(r){ return 'до ' + r.guests; }],
+    ['Основные места', function(){ return '2 (кровать 2-х местная)'; }],
+    ['Доп. место, 700 ₽ за сутки', function(r){ return 'можно до ' + r.extra; }],
+    ['Кухня', function(){ return 'Есть'; }],
+    ['Терраса и вид', function(){ return 'Своя, вид на реку'; }],
+    ['Номер', function(){ return 'Для некурящих'; }],
+    ['Сезон', seasonText],
+    ['Таких номеров', function(r){ return r.count; }]
+  ];
+  var head = '<tr><th></th>' + rs.map(function(r){ return '<td class="h"><img src="' + photoUrl(r, r.cover) + '" alt=""><b>' + r.name + '</b></td>'; }).join('') + '</tr>';
+  var body = rows.map(function(row){
+    var vals = rs.map(row[1]), diff = vals.some(function(v){ return String(v) !== String(vals[0]); });
+    return '<tr' + (diff ? ' class="diff"' : '') + '><th scope="row">' + row[0] + '</th>' + vals.map(function(v){ return '<td>' + v + '</td>'; }).join('') + '</tr>';
+  }).join('');
+  var links = '<tr><th></th>' + rs.map(function(r){ return '<td><a class="btn p" href="book.html?type=' + r.slug + '">Свободные даты</a></td>'; }).join('') + '</tr>';
+  ov2.innerHTML = '<div class="cmpbox"><button class="close" type="button" aria-label="Закрыть">×</button><h2>Сравнение номеров</h2><div class="tw"><table>' + head + body + links + '</table></div><p style="font-size:13px;color:#5B655F;margin-top:10px">Отличающиеся параметры подсвечены.</p></div>';
+  ov2.classList.add('on'); ov2.querySelector('.close').addEventListener('click', closeCmp); ov2.querySelector('.close').focus();
+});
+function closeCmp(){ var o = document.getElementById('ov2'); o.classList.remove('on'); o.textContent = ''; }
+
+renderGrid();
+var q = new URLSearchParams(location.search).get('room');   // ссылка с сайта открывает нужный номер сразу
+if (q && byslug(q)) openView(q);
+</script>
+<script src="dog.js" defer></script>
+</body>
+</html>

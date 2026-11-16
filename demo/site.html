@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Скай Алтай — референс B+A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Manrope:wght@400;600;800&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* «Катунь + тёплый дом»: светлый дневной верх (дома, даты) → тёмный янтарный вечер (баня, кухня) → светлый низ (вопросы, контакты). Узор плитки — только разделитель. */
+:root{
+  --river:#1F8A8A; --pine:#1F4D3C; --amber:#E39B2F; --snow:#F5F8F7; --coal:#1E2622;
+  --night:#14221C; --night2:#1C2F26; --cream:#F3E9D6; --muted:#5B655F; --line:#D9E1DD;
+  --tile1:#5B7C8D; --tile2:#EADFC8; --tile3:#8A3B2A;
+  --head:'Unbounded','Manrope',sans-serif; --warm:'Bitter',Georgia,serif; --body:'Manrope',Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--snow);color:var(--coal);font-family:var(--body);line-height:1.6;padding-bottom:70px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+h1,h2,h3{text-wrap:balance;line-height:1.15}
+h2{font-family:var(--head);font-weight:500;font-size:clamp(22px,3vw,32px);margin-bottom:10px}
+.lead{max-width:62ch;color:var(--muted)}
+section{padding:64px 0}
+
+/* шапка */
+.bar{position:sticky;top:0;z-index:20;background:rgba(245,248,247,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:6px 22px;height:84px}
+.logo{display:block;text-decoration:none;margin-right:auto}
+.logo img{display:block;height:66px;width:auto}
+.hero-logo{display:block;width:clamp(210px,28vw,340px);height:auto;margin-bottom:22px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.35))}
+.bar nav{display:flex;gap:20px;font-size:14px;font-weight:600}
+.bar nav a{text-decoration:none;color:var(--coal)}
+.bar nav a:hover{color:var(--river)}
+.tel{font-weight:800;text-decoration:none;color:#fff;background:var(--pine);padding:9px 16px;border-radius:99px;font-size:14px;white-space:nowrap}
+@media(max-width:820px){.bar nav{display:none}}
+
+/* первый экран */
+.hero{position:relative;color:#fff;background:linear-gradient(180deg,rgba(10,40,40,.2) 0%,rgba(10,40,40,.78) 100%),url(photos/02.jpg) center/cover;padding:84px 0 40px;min-height:660px;display:flex;align-items:flex-end}
+.hero h1{font-family:var(--head);font-weight:700;font-size:clamp(32px,6vw,60px);max-width:14ch;letter-spacing:-.01em}
+.hero p{max-width:46ch;font-size:clamp(16px,2vw,19px);margin:14px 0 26px;opacity:.96}
+.find{display:flex;flex-wrap:wrap;gap:10px;background:#fff;color:var(--coal);border-radius:18px;padding:12px;max-width:760px;box-shadow:0 20px 50px rgba(0,0,0,.28)}
+.find label{flex:1 1 120px;background:#EEF4F3;border-radius:12px;padding:8px 12px;font-size:11.5px;font-weight:700;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.find input,.find select{font:inherit;font-size:15px;font-weight:700;color:var(--coal);border:0;background:transparent;padding:0;min-width:0}
+.find button{flex:1 1 150px;border:0;border-radius:12px;background:var(--river);color:#fff;font:inherit;font-weight:800;font-size:16px;padding:14px;cursor:pointer;min-height:48px}
+.find button:hover{background:#17706F}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:20px;font-size:14px;font-weight:600}
+.facts span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-right:8px}
+
+/* дома */
+.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:26px}
+.room{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.room .main{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
+.room .body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.room h3{font-family:var(--head);font-weight:500;font-size:16px}
+.room small{color:var(--muted);font-size:13.5px}
+.room a{margin-top:auto;font-weight:800;font-size:14px;color:var(--river);text-decoration:none}
+.price-note{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;font-size:15px}
+.price-note b{font-family:var(--head);font-weight:500;font-size:19px;color:var(--pine)}
+.todo{font-size:12px;font-weight:700;color:#8A5A00;background:#FFF1D6;border-radius:6px;padding:2px 8px;white-space:nowrap}
+
+/* рядом: расстояния до достопримечательностей */
+.near{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:26px}
+.near .it{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;transition:transform .25s ease,box-shadow .25s ease}
+.near .it:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(20,34,28,.12)}
+.near .km{font-family:var(--head);font-weight:600;font-size:28px;color:var(--river);line-height:1}
+.near .km small{font-size:14px;font-weight:500;color:var(--muted);margin-left:4px}
+.near .far .km{color:var(--pine)}
+.near h3{font-family:var(--head);font-weight:500;font-size:16px;color:var(--pine)}
+.near p{font-size:14px;color:#2F3A35}
+.near-note{margin-top:16px;font-size:13.5px;color:var(--muted);max-width:70ch}
+
+/* территория: вкладки, сетка фото, просмотр */
+.ttabs{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 16px}
+.ttabs button{border:1.5px solid var(--line);background:#fff;color:var(--coal);border-radius:99px;padding:9px 16px;font:700 14px var(--body);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.ttabs button:hover{border-color:var(--river)}
+.ttabs button[aria-selected="true"]{background:var(--river);border-color:var(--river);color:#fff}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.tgrid[hidden]{display:none}
+.tp{border:0;padding:0;border-radius:16px;overflow:hidden;cursor:zoom-in;background:#E6ECE9;aspect-ratio:3/2;position:relative}
+.tp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.tp:hover img{transform:scale(1.05)}
+.lb{position:fixed;inset:0;z-index:80;background:rgba(10,20,16,.92);display:flex;align-items:center;justify-content:center;padding:18px}
+.lb[hidden]{display:none}
+.lb figure{margin:0;max-width:min(1100px,86vw);text-align:center;color:#E8EFEA;font-size:14px}
+.lb img{max-width:100%;max-height:78vh;border-radius:12px;display:block;margin:0 auto 10px;transition:opacity .2s}
+.lbx,.lbn{position:absolute;border:0;background:rgba(255,255,255,.14);color:#fff;width:46px;height:46px;border-radius:50%;font-size:28px;line-height:1;cursor:pointer}
+.lbx:hover,.lbn:hover{background:rgba(255,255,255,.28)}
+.lbx{top:14px;right:14px}.lbp{left:14px}.lbf{right:14px}
+.lbn{top:50%;margin-top:-23px}
+@media(max-width:700px){.lbp{left:6px}.lbf{right:6px}.lbn{width:40px;height:40px}}
+
+/* выбор мессенджера: Telegram или MAX */
+.msg{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.msg a{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:99px;font-weight:800;font-size:16px;text-decoration:none;color:#fff;transition:transform .15s,filter .2s}
+.msg a:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.msg .tg{background:#2AABEE}.msg .mx{background:linear-gradient(135deg,#3F8CFF,#8A3FFC)}
+.msg svg{width:18px;height:18px;flex:none}
+.cbox .todo{display:inline-block;margin-top:8px}
+.sticky button.w{flex:1;text-align:center;padding:13px 8px;border-radius:12px;font:800 15px var(--body);border:0;background:#EEF4F3;color:var(--pine);cursor:pointer}
+.wmenu{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);z-index:31;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px;min-width:230px;box-shadow:0 14px 40px rgba(20,34,28,.25)}
+.wmenu[hidden]{display:none}
+.wmenu small{color:var(--muted);font-size:12.5px;padding:0 4px}
+.wmenu .msg{margin:0;flex-direction:column}
+.wmenu .msg a{justify-content:center}
+
+/* карточка номера: галерея, цена, параметры как на sky-altai.ru */
+.gal{position:relative}
+.badge{position:absolute;left:10px;top:10px;font-size:12px;font-weight:800;border-radius:99px;padding:4px 10px;background:#fff;color:var(--pine);box-shadow:0 1px 6px rgba(0,0,0,.2)}
+.badge.s{background:#FFF1D6;color:#7A4A00}
+.thumbs{display:flex;gap:6px;padding:8px 10px 0}
+.thumbs button{border:2px solid transparent;border-radius:8px;padding:0;background:none;cursor:pointer;width:56px;height:40px;overflow:hidden;opacity:.7}
+.thumbs button[aria-pressed="true"]{border-color:var(--river);opacity:1}
+.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.from{font-family:var(--head);font-weight:500;font-size:17px;color:var(--river)}
+.par{display:grid;grid-template-columns:auto 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+.par dt,.par dd{padding:7px 12px;border-bottom:1px solid #EEF1EF}
+.par dt{color:var(--muted);background:#F7FAF9}
+.par dd{font-weight:700;text-align:right}
+.par dt:nth-last-of-type(1),.par dd:nth-last-of-type(1){border-bottom:0}
+.count{font-size:13px;color:var(--muted)}
+/* карточка номера: цена на фото, три главных показателя, значки удобств */
+.ptag{position:absolute;right:10px;top:10px;background:rgba(20,34,28,.88);color:#fff;border-radius:12px;padding:6px 12px;font-family:var(--head);font-weight:500;font-size:16px;line-height:1.1;text-align:right}
+.ptag small{display:block;font-family:var(--body);font-weight:600;font-size:11px;opacity:.85}
+.room .stats{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.room .stats li{background:#EAF5F4;border-radius:14px;padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--pine)}
+.room .stats svg{width:24px;height:24px}
+.room .stats b{font-family:var(--head);font-weight:500;font-size:15px;color:var(--coal);line-height:1.2}
+.room .stats span{font-size:11.5px;color:var(--muted)}
+.room .feat{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.room .feat li{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:5px 11px 5px 8px;font-size:13px;font-weight:600}
+.room .feat svg{width:16px;height:16px;color:var(--river);flex:none}
+.room .feat li.hl{background:#DDF1F0;border-color:#B6DCDA;color:#0F5958}
+.room .extra{display:flex;gap:8px;align-items:center;font-size:13.5px;background:#FFF6E0;border-radius:12px;padding:9px 12px;color:#6B4400;margin:0}
+.room .extra svg{width:18px;height:18px;flex:none}
+.room .btn2{margin-top:auto;display:block;text-align:center;background:var(--river);color:#fff;font-weight:800;font-size:15px;border-radius:12px;padding:13px;text-decoration:none}
+.room .btn2:hover{background:var(--river-d,#17706F)}
+/* ── анимация (спокойный набор + пар над баней) ── */
+.rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.d1{animation-delay:.05s}.d2{animation-delay:.25s}.d3{animation-delay:.45s}.d4{animation-delay:.65s}.d5{animation-delay:.85s}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*90ms)}
+.rv.in{opacity:1;transform:none}
+.room{transition:transform .35s ease,box-shadow .35s ease}
+.room:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(31,77,60,.18)}
+.room .main{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.room:hover .main{transform:scale(1.05)}
+.room .gal{overflow:hidden}
+.room .lnk{font-size:13.5px;font-weight:800;color:var(--river);text-decoration:none}
+.room .lnk:hover{text-decoration:underline}
+.room .btn2{transition:background .25s,letter-spacing .25s}
+.room .btn2:hover{letter-spacing:.02em}
+.pic{position:relative}
+.steam{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.steam i{position:absolute;bottom:-30px;width:70px;height:90px;border-radius:50%;background:rgba(243,233,214,.5);filter:blur(20px);opacity:0}
+.steam i:nth-child(1){left:20%;animation:steam 7s ease-in infinite}
+.steam i:nth-child(2){left:40%;animation:steam 9s ease-in 2s infinite;width:90px}
+.steam i:nth-child(3){left:60%;animation:steam 8s ease-in 4s infinite}
+.steam i:nth-child(4){left:78%;animation:steam 10s ease-in 1s infinite;width:60px}
+@keyframes steam{0%{transform:translate(0,0) scale(.7);opacity:0}20%{opacity:.7}100%{transform:translate(18px,-220px) scale(1.7);opacity:0}}
+.sticky .c{animation:wig 6s ease-in-out infinite}
+@keyframes wig{0%,62%,100%{transform:none}66%,74%,82%{transform:rotate(-2.5deg) scale(1.03)}70%,78%,86%{transform:rotate(2.5deg) scale(1.03)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+/* узор-разделитель */
+.tiles{height:22px;background:conic-gradient(from 45deg at 50% 50%,var(--tile1) 0 25%,var(--tile2) 0 50%,var(--tile3) 0 75%,var(--tile2) 0) 0 0/22px 22px}
+
+/* тёмные разделы */
+.night{background:var(--night);color:var(--cream)}
+.night h2{font-family:var(--warm);font-weight:700;color:#fff;font-size:clamp(26px,3.4vw,38px)}
+.night .lead{color:#C9BFA8}
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.pic{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:#2A1F14 url(photos/04.jpg) center/cover}
+.pic.ph{background:linear-gradient(135deg,#3A2A18,#1B1510);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;border:2px dashed rgba(233,162,59,.55)}
+.pic.ph span{color:#F0C98B;font-weight:700;font-size:15px;max-width:26ch}
+.checks{list-style:none;padding:0;margin:18px 0}
+.checks li{padding:8px 0 8px 30px;position:relative;border-bottom:1px solid rgba(243,233,214,.12)}
+.checks li::before{content:"";position:absolute;left:4px;top:15px;width:12px;height:12px;border-radius:3px;background:var(--amber);transform:rotate(45deg)}
+.slots{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.slots button{font:inherit;font-weight:800;font-size:15px;padding:12px 16px;min-height:46px;border-radius:12px;border:1.5px solid rgba(233,162,59,.6);background:transparent;color:var(--cream);cursor:pointer}
+.slots button[aria-pressed="true"]{background:var(--amber);color:#2A1A05;border-color:var(--amber)}
+.slots button:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.btn{display:inline-block;margin-top:14px;background:var(--amber);color:#2A1A05;font-weight:800;text-decoration:none;border-radius:12px;padding:14px 22px;font-size:16px}
+.btn:hover{background:#F0AE4A}
+.mini{font-size:13px;color:#C9BFA8}
+
+/* кухня */
+.order{background:var(--night2);border:1px solid rgba(233,162,59,.35);border-radius:20px;padding:18px 20px}
+.order .line{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid rgba(243,233,214,.12)}
+.order .line:last-of-type{border-bottom:0}
+.order b{font-family:var(--warm);font-size:19px;color:#fff;display:block}
+.order small{color:#C9BFA8}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(233,162,59,.6);background:transparent;color:var(--cream);font-size:22px;font-weight:800;cursor:pointer;line-height:1}
+.step output{min-width:26px;text-align:center;font-weight:800;font-size:17px}
+.order .sum{display:flex;justify-content:space-between;margin-top:10px;font-weight:800;color:#fff}
+
+/* вопросы */
+.faq{display:grid;gap:10px;margin-top:22px;max-width:820px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 18px}
+.faq summary{cursor:pointer;font-weight:800;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--river);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq p{padding:0 0 16px;color:#2F3A35}
+.faq b{color:var(--pine)}
+
+/* контакты */
+.contacts{background:var(--pine);color:#fff}
+.contacts h2{color:#fff}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:22px}
+.cbox{background:rgba(255,255,255,.08);border-radius:16px;padding:16px 18px}
+.cbox small{display:block;color:#BFD6CB;font-size:12.5px;margin-bottom:2px}
+.cbox a{font-weight:800;font-size:18px;text-decoration:none}
+.legal{font-size:13px;color:#BFD6CB;margin-top:22px}
+
+/* липкая панель на телефоне */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line)}
+.sticky a{flex:1;text-align:center;padding:13px 8px;border-radius:12px;font-weight:800;text-decoration:none;font-size:15px}
+.sticky .c{background:var(--pine);color:#fff}
+.sticky .w{background:#EEF4F3;color:var(--pine)}
+.sticky .d{background:var(--river);color:#fff}
+@media(max-width:820px){.sticky{display:flex}}
+.note{position:fixed;right:14px;top:74px;z-index:25;max-width:240px;background:#FFF1D6;color:#6B4400;border:1px solid #E6C27A;border-radius:12px;padding:10px 12px;font-size:12px;font-weight:600}
+.note button{all:unset;cursor:pointer;float:right;font-weight:800;margin-left:8px}
+@media(max-width:820px){.note{top:auto;bottom:76px}}
+</style>
+</head>
+<body>
+
+<aside class="note" id="note"><button type="button" onclick="document.getElementById('note').remove()" aria-label="Закрыть подсказку">×</button>Это демо. Метки «цена уточняется» и пунктирные блоки — то, чего пока нет: цены бани и еды, фото бани и вареников.</aside>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Скай Алтай, на главную"><img src="photos/logo-pine.png" alt="Скай Алтай"></a>
+    <nav aria-label="Разделы"><a href="#doma">Домики</a><a href="#banya">Баня</a><a href="#kuhnya">Заморозка</a><a href="#territoriya">Территория</a><a href="#ryadom">Рядом</a><a href="#voprosy">Вопросы</a><a href="#kontakty">Контакты</a><a href="rooms.html">Шоурум</a><a href="book.html">Забронировать</a></nav>
+    <a class="tel" href="tel:+79529061626">+7 952 906-16-26</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" style="padding-top:84px">
+  <div class="wrap">
+    <img class="hero-logo rise d1" src="photos/logo-white.png" alt="Скай Алтай">
+    <h1 class="rise d2">Первая линия Катуни</h1>
+    <p class="rise d3">Тёплые домики в Элекмонаре, баня на дровах с купелью и домашние пельмени с варениками. Выберите даты и сразу увидите свободные дома.</p>
+    <form class="find rise d4" onsubmit="return goBook(event)">
+      <label>Заезд<input type="date" value="2027-07-26"></label>
+      <label>Выезд<input type="date" value="2027-07-29"></label>
+      <label>Гостей<select><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+      <label>Возраст на доп. месте<input type="text" inputmode="numeric" placeholder="например, 5, 12"></label>
+      <button type="submit">Показать свободные</button>
+    </form>
+    <div class="facts rise d5"><span>С апреля по октябрь открыты все 8 домов</span><span>Своя терраса с видом на реку</span><span>Кухня в каждом доме</span><span>Бассейн и мангальные зоны</span><span>Бесплатная парковка</span></div>
+  </div>
+</section>
+
+<section id="doma">
+  <div class="wrap">
+    <h2>Дома и номера</h2>
+    <p class="lead">У каждого дома своя терраса с видом на реку. Во всех номерах кухня, Wi-Fi и ТВ, номера для некурящих. Дополнительное место ставим за 700 ₽ в сутки.</p>
+    <div class="rooms">
+      <article class="room" data-rv>
+        <div class="gal"><img class="main" src="photos/rooms/bereg-1.jpg" alt="Крыльцо дома с подвесным креслом" loading="lazy"><span class="badge s">Апрель–октябрь</span><span class="ptag"><small>от</small>7 000 ₽<small>за сутки</small></span><div class="thumbs"><button type="button" aria-label="Фото 1" aria-pressed="true"><img src="photos/rooms/bereg-1.jpg" alt=""></button><button type="button" aria-label="Фото 2" aria-pressed="false"><img src="photos/rooms/bereg-2.jpg" alt=""></button><button type="button" aria-label="Фото 3" aria-pressed="false"><img src="photos/rooms/bereg-3.jpg" alt=""></button></div></div>
+        <div class="body"><h3>Дом на берегу</h3>
+          <ul class="stats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><b>25 м²</b><span>площадь</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9v18H6z"/><path d="M15 7h3v14h-3"/><circle cx="12" cy="12" r=".9"/></svg><b>1</b><span>комната</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.9.3 5 2.6 5 5.8"/></svg><b>до 3</b><span>гостей</span></li></ul>
+          <ul class="feat"><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3.2"/><path d="M3 20h18M5 20v-4h14v4M8 16v4M16 16v4"/></svg>Своя терраса</li><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9c2 0 2-2 4.5-2S10 9 12 9s2.5-2 4.5-2S19 9 21 9M3 15c2 0 2-2 4.5-2S10 15 12 15s2.5-2 4.5-2S19 15 21 15"/></svg>Вид на реку</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M3 10h18M9 6.5c0-1.5 1-2 1-3.5M14 6.5c0-1.5 1-2 1-3.5"/></svg>Кухня</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19V7M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.5 9H11v6"/><circle cx="7" cy="11.5" r="1.7"/></svg>Кровать 2-х местная</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8M8 13h5"/></svg>Для некурящих</li></ul>
+          <p class="extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Доп. место: 700 ₽ за сутки (можно до 1)</span></p>
+          <a class="lnk" href="rooms.html?room=bereg">Смотреть все фото номера</a><a class="btn2" href="book.html?type=bereg">Узнать даты</a></div>
+      </article>
+      <article class="room" data-rv>
+        <div class="gal"><img class="main" src="photos/rooms/semeynyi-1.jpg" alt="Гостиная с кухней и телевизором" loading="lazy"><span class="badge">Круглый год</span><span class="ptag"><small>от</small>10 000 ₽<small>за сутки</small></span><div class="thumbs"><button type="button" aria-label="Фото 1" aria-pressed="true"><img src="photos/rooms/semeynyi-1.jpg" alt=""></button><button type="button" aria-label="Фото 2" aria-pressed="false"><img src="photos/rooms/semeynyi-2.jpg" alt=""></button><button type="button" aria-label="Фото 3" aria-pressed="false"><img src="photos/rooms/semeynyi-3.jpg" alt=""></button></div></div>
+        <div class="body"><h3>Дом Семейный</h3>
+          <ul class="stats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><b>40 м²</b><span>площадь</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9v18H6z"/><path d="M15 7h3v14h-3"/><circle cx="12" cy="12" r=".9"/></svg><b>2</b><span>комнаты</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.9.3 5 2.6 5 5.8"/></svg><b>до 5</b><span>гостей</span></li></ul>
+          <ul class="feat"><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3.2"/><path d="M3 20h18M5 20v-4h14v4M8 16v4M16 16v4"/></svg>Своя терраса</li><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9c2 0 2-2 4.5-2S10 9 12 9s2.5-2 4.5-2S19 9 21 9M3 15c2 0 2-2 4.5-2S10 15 12 15s2.5-2 4.5-2S19 15 21 15"/></svg>Вид на реку</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M3 10h18M9 6.5c0-1.5 1-2 1-3.5M14 6.5c0-1.5 1-2 1-3.5"/></svg>Кухня</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19V7M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.5 9H11v6"/><circle cx="7" cy="11.5" r="1.7"/></svg>Кровать 2-х местная</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8M8 13h5"/></svg>Для некурящих</li></ul>
+          <p class="extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Доп. место: 700 ₽ за сутки (можно до 3)</span></p>
+          <a class="lnk" href="rooms.html?room=semeynyi">Смотреть все фото номера</a><a class="btn2" href="book.html?type=semeynyi">Узнать даты</a></div>
+      </article>
+      <article class="room" data-rv>
+        <div class="gal"><img class="main" src="photos/rooms/dvuhkomnatnyi-1.jpg" alt="Спальня с большим окном" loading="lazy"><span class="badge">Круглый год</span><span class="ptag"><small>от</small>6 000 ₽<small>за сутки</small></span><div class="thumbs"><button type="button" aria-label="Фото 1" aria-pressed="true"><img src="photos/rooms/dvuhkomnatnyi-1.jpg" alt=""></button><button type="button" aria-label="Фото 2" aria-pressed="false"><img src="photos/rooms/dvuhkomnatnyi-2.jpg" alt=""></button><button type="button" aria-label="Фото 3" aria-pressed="false"><img src="photos/rooms/dvuhkomnatnyi-3.jpg" alt=""></button></div></div>
+        <div class="body"><h3>2-х комнатный</h3>
+          <ul class="stats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><b>30 м²</b><span>площадь</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9v18H6z"/><path d="M15 7h3v14h-3"/><circle cx="12" cy="12" r=".9"/></svg><b>2</b><span>комнаты</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.9.3 5 2.6 5 5.8"/></svg><b>до 4</b><span>гостей</span></li></ul>
+          <ul class="feat"><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3.2"/><path d="M3 20h18M5 20v-4h14v4M8 16v4M16 16v4"/></svg>Своя терраса</li><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9c2 0 2-2 4.5-2S10 9 12 9s2.5-2 4.5-2S19 9 21 9M3 15c2 0 2-2 4.5-2S10 15 12 15s2.5-2 4.5-2S19 15 21 15"/></svg>Вид на реку</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M3 10h18M9 6.5c0-1.5 1-2 1-3.5M14 6.5c0-1.5 1-2 1-3.5"/></svg>Кухня</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19V7M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.5 9H11v6"/><circle cx="7" cy="11.5" r="1.7"/></svg>Кровать 2-х местная</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8M8 13h5"/></svg>Для некурящих</li></ul>
+          <p class="extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Доп. место: 700 ₽ за сутки (можно до 2)</span></p>
+          <p class="count">Таких номеров: 2</p><a class="lnk" href="rooms.html?room=dvuhkomnatnyi">Смотреть все фото номера</a><a class="btn2" href="book.html?type=dvuhkomnatnyi">Узнать даты</a></div>
+      </article>
+      <article class="room" data-rv>
+        <div class="gal"><img class="main" src="photos/rooms/studiya-1.jpg" alt="Кровать и телевизор" loading="lazy"><span class="badge s">Зимой: 1 из 2</span><span class="ptag"><small>от</small>6 000 ₽<small>за сутки</small></span><div class="thumbs"><button type="button" aria-label="Фото 1" aria-pressed="true"><img src="photos/rooms/studiya-1.jpg" alt=""></button><button type="button" aria-label="Фото 2" aria-pressed="false"><img src="photos/rooms/studiya-2.jpg" alt=""></button><button type="button" aria-label="Фото 3" aria-pressed="false"><img src="photos/rooms/studiya-3.jpg" alt=""></button></div></div>
+        <div class="body"><h3>Студия</h3>
+          <ul class="stats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><b>30 м²</b><span>площадь</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9v18H6z"/><path d="M15 7h3v14h-3"/><circle cx="12" cy="12" r=".9"/></svg><b>1</b><span>комната</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.9.3 5 2.6 5 5.8"/></svg><b>до 3</b><span>гостей</span></li></ul>
+          <ul class="feat"><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3.2"/><path d="M3 20h18M5 20v-4h14v4M8 16v4M16 16v4"/></svg>Своя терраса</li><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9c2 0 2-2 4.5-2S10 9 12 9s2.5-2 4.5-2S19 9 21 9M3 15c2 0 2-2 4.5-2S10 15 12 15s2.5-2 4.5-2S19 15 21 15"/></svg>Вид на реку</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M3 10h18M9 6.5c0-1.5 1-2 1-3.5M14 6.5c0-1.5 1-2 1-3.5"/></svg>Кухня</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19V7M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.5 9H11v6"/><circle cx="7" cy="11.5" r="1.7"/></svg>Кровать 2-х местная</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8M8 13h5"/></svg>Для некурящих</li></ul>
+          <p class="extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Доп. место: 700 ₽ за сутки (можно до 1)</span></p>
+          <p class="count">Таких номеров: 2</p><a class="lnk" href="rooms.html?room=studiya">Смотреть все фото номера</a><a class="btn2" href="book.html?type=studiya">Узнать даты</a></div>
+      </article>
+      <article class="room" data-rv>
+        <div class="gal"><img class="main" src="photos/rooms/standart-1.jpg" alt="Кровать с зелёным покрывалом" loading="lazy"><span class="badge s">Апрель–октябрь</span><span class="ptag"><small>от</small>5 000 ₽<small>за сутки</small></span><div class="thumbs"><button type="button" aria-label="Фото 1" aria-pressed="true"><img src="photos/rooms/standart-1.jpg" alt=""></button><button type="button" aria-label="Фото 2" aria-pressed="false"><img src="photos/rooms/standart-2.jpg" alt=""></button><button type="button" aria-label="Фото 3" aria-pressed="false"><img src="photos/rooms/standart-3.jpg" alt=""></button></div></div>
+        <div class="body"><h3>Стандарт</h3>
+          <ul class="stats"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg><b>25 м²</b><span>площадь</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9v18H6z"/><path d="M15 7h3v14h-3"/><circle cx="12" cy="12" r=".9"/></svg><b>1</b><span>комната</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M16 14.2c2.9.3 5 2.6 5 5.8"/></svg><b>до 4</b><span>гостей</span></li></ul>
+          <ul class="feat"><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3.2"/><path d="M3 20h18M5 20v-4h14v4M8 16v4M16 16v4"/></svg>Своя терраса</li><li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9c2 0 2-2 4.5-2S10 9 12 9s2.5-2 4.5-2S19 9 21 9M3 15c2 0 2-2 4.5-2S10 15 12 15s2.5-2 4.5-2S19 15 21 15"/></svg>Вид на реку</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h14v8a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M3 10h18M9 6.5c0-1.5 1-2 1-3.5M14 6.5c0-1.5 1-2 1-3.5"/></svg>Кухня</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19V7M3 15h18v4M21 15v-2.5A3.5 3.5 0 0 0 17.5 9H11v6"/><circle cx="7" cy="11.5" r="1.7"/></svg>Кровать 2-х местная</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8M8 13h5"/></svg>Для некурящих</li></ul>
+          <p class="extra"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Доп. место: 700 ₽ за сутки (можно до 2)</span></p>
+          <p class="count">Таких номеров: 2</p><a class="lnk" href="rooms.html?room=standart">Смотреть все фото номера</a><a class="btn2" href="book.html?type=standart">Узнать даты</a></div>
+      </article>
+    </div>
+    <div class="price-note" data-rv><span>Цена за сутки указана «от»</span><span>Дополнительное место <b>700 ₽</b> за сутки, возраст гостя уточняем при бронировании</span><span class="todo">как меняется цена по датам — уточняется</span></div>
+  </div>
+</section>
+
+<div class="tiles" aria-hidden="true"></div>
+
+<section class="night" id="banya">
+  <div class="wrap split">
+    <div>
+      <h2>Баня на дровах с купелью</h2>
+      <p class="lead">Выберите время сеанса, остальное согласуем при бронировании.</p>
+      <ul class="checks"><li>Настоящая дровяная баня</li><li>Купель после пара</li><li>Сеансы по часам</li></ul>
+      <div class="slots" role="group" aria-label="Время бани (пример)">
+        <button type="button" aria-pressed="false">14:00</button><button type="button" aria-pressed="false">16:00</button><button type="button" aria-pressed="true">18:00</button><button type="button" disabled>20:00</button>
+      </div>
+      <p class="mini">Время для примера. Занятые сеансы будут зачёркнуты автоматически. <span class="todo">цена бани уточняется</span></p>
+      <a class="btn" href="book.html#bath">Забронировать баню</a>
+    </div>
+    <div class="pic" style="background-image:url(photos/territory/t15.jpg)" role="img" aria-label="Парная с печью и деревянными полками"><div class="steam" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+  </div>
+</section>
+
+<section class="night" id="kuhnya" style="padding-top:0">
+  <div class="wrap split">
+    <div class="pic" style="background-image:url(photos/06.jpg)" role="img" aria-label="Уютная кухня с плиткой-пэчворк"></div>
+    <div>
+      <h2>Домашняя заморозка: пельмени, вареники, блины</h2>
+      <p class="lead">Хозяйка делает их сама. Берите замороженными с собой или к заезду и варите на кухне своего домика.</p>
+      <div class="order" role="group" aria-label="Предзаказ (пример)">
+        <div class="line"><div><b>Пельмени</b><small>упаковка <span class="todo">вес и цена уточняются</span></small></div><div class="step"><button type="button" data-d="-1" aria-label="Меньше пельменей">−</button><output id="q0">1</output><button type="button" data-d="1" aria-label="Больше пельменей">+</button></div></div>
+        <div class="line"><div><b>Вареники</b><small>упаковка<span class="todo">цена уточняется</span></small></div><div class="step"><button type="button" data-d="-1" aria-label="Меньше вареников">−</button><output id="q1">2</output><button type="button" data-d="1" aria-label="Больше вареников">+</button></div></div>
+        <div class="line"><div><b>Блины</b><small>упаковка<span class="todo">цена уточняется</span></small></div><div class="step"><button type="button" data-d="-1" aria-label="Меньше блинов">−</button><output id="q2">0</output><button type="button" data-d="1" aria-label="Больше блинов">+</button></div></div>
+        <div class="sum"><span>Забрать</span><span>при заезде ▾</span></div>
+      </div>
+      <a class="btn" href="book.html#food">Заказать с бронью</a>
+      <p class="mini">Продукция замороженная, готовить нужно самим. Выдадим при заезде или выезде.</p>
+    </div>
+  </div>
+</section>
+
+<section id="territoriya">
+  <div class="wrap">
+    <h2>Территория базы</h2>
+    <p class="lead">Своя территория на берегу Катуни: бассейн, беседки с мангальной зоной, качели и детская площадка, а ещё баня. <span class="todo">условия бассейна и мангала уточняются</span></p>
+    <div class="ttabs" role="tablist" aria-label="Разделы галереи"><button type="button" role="tab" data-g="dom" aria-selected="true">Дом и бассейн</button><button type="button" role="tab" data-g="besedki" aria-selected="false">Беседки и мангальная зона</button><button type="button" role="tab" data-g="dvor" aria-selected="false">Двор и отдых</button><button type="button" role="tab" data-g="banya" aria-selected="false">Баня</button></div>
+      <div class="tgrid" role="tabpanel" data-g="dom"><button type="button" class="tp" data-i="1" aria-label="Открыть фото: Дом с балконами, на переднем плане цветы"><img src="photos/territory/t01.jpg" alt="Дом с балконами, на переднем плане цветы" loading="lazy"></button><button type="button" class="tp" data-i="2" aria-label="Открыть фото: Бассейн и шезлонги на деревянной террасе"><img src="photos/territory/t02.jpg" alt="Бассейн и шезлонги на деревянной террасе" loading="lazy"></button><button type="button" class="tp" data-i="3" aria-label="Открыть фото: Дом с лестницей среди зелени"><img src="photos/territory/t03.jpg" alt="Дом с лестницей среди зелени" loading="lazy"></button><button type="button" class="tp" data-i="4" aria-label="Открыть фото: Домики на газоне и бассейн"><img src="photos/territory/t04.jpg" alt="Домики на газоне и бассейн" loading="lazy"></button></div>
+      <div class="tgrid" role="tabpanel" data-g="besedki" hidden><button type="button" class="tp" data-i="5" aria-label="Открыть фото: Беседка с лавками и занавесками"><img src="photos/territory/t05.jpg" alt="Беседка с лавками и занавесками" loading="lazy"></button><button type="button" class="tp" data-i="6" aria-label="Открыть фото: Беседка с решётчатыми стенками"><img src="photos/territory/t06.jpg" alt="Беседка с решётчатыми стенками" loading="lazy"></button><button type="button" class="tp" data-i="7" aria-label="Открыть фото: Мангальная зона под навесом"><img src="photos/territory/t07.jpg" alt="Мангальная зона под навесом" loading="lazy"></button><button type="button" class="tp" data-i="8" aria-label="Открыть фото: Большая беседка со столом и занавесками"><img src="photos/territory/t08.jpg" alt="Большая беседка со столом и занавесками" loading="lazy"></button></div>
+      <div class="tgrid" role="tabpanel" data-g="dvor" hidden><button type="button" class="tp" data-i="9" aria-label="Открыть фото: Дорожка с цветами между домиками"><img src="photos/territory/t09.jpg" alt="Дорожка с цветами между домиками" loading="lazy"></button><button type="button" class="tp" data-i="10" aria-label="Открыть фото: Белые качели во дворе"><img src="photos/territory/t10.jpg" alt="Белые качели во дворе" loading="lazy"></button><button type="button" class="tp" data-i="11" aria-label="Открыть фото: Шезлонги на деревянной террасе"><img src="photos/territory/t11.jpg" alt="Шезлонги на деревянной террасе" loading="lazy"></button><button type="button" class="tp" data-i="12" aria-label="Открыть фото: Детская площадка: батут, песочница, горка"><img src="photos/territory/t12.jpg" alt="Детская площадка: батут, песочница, горка" loading="lazy"></button></div>
+      <div class="tgrid" role="tabpanel" data-g="banya" hidden><button type="button" class="tp" data-i="13" aria-label="Открыть фото: Баня снаружи"><img src="photos/territory/t13.jpg" alt="Баня снаружи" loading="lazy"></button><button type="button" class="tp" data-i="14" aria-label="Открыть фото: Комната отдыха в бане со столом"><img src="photos/territory/t14.jpg" alt="Комната отдыха в бане со столом" loading="lazy"></button><button type="button" class="tp" data-i="15" aria-label="Открыть фото: Парная с печью и полками"><img src="photos/territory/t15.jpg" alt="Парная с печью и полками" loading="lazy"></button><button type="button" class="tp" data-i="16" aria-label="Открыть фото: Помещение бани с лавками и деревянной бочкой"><img src="photos/territory/t16.jpg" alt="Помещение бани с лавками и деревянной бочкой" loading="lazy"></button></div>
+  </div>
+</section>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Просмотр фото">
+  <button type="button" class="lbx" id="lbx" aria-label="Закрыть">×</button>
+  <button type="button" class="lbn lbp" id="lbp" aria-label="Предыдущее фото">‹</button>
+  <figure><img id="lbi" alt=""><figcaption id="lbc"></figcaption></figure>
+  <button type="button" class="lbn lbf" id="lbf" aria-label="Следующее фото">›</button>
+</div>
+
+<section id="ryadom">
+  <div class="wrap">
+    <h2>Что рядом и сколько ехать</h2>
+    <p class="lead">Расстояния по дороге от базы. Сама база стоит на Катуни, в 6 км от Чемала.</p>
+    <div class="near">
+      <div class="it" data-rv><div class="km">≈ 6<small>км</small></div><h3>Чемал</h3><p>Центр района: набережная Катуни, магазины, кафе, остров Патмос рядом.</p></div>
+      <div class="it" data-rv><div class="km">≈ 7<small>км</small></div><h3>Чемальская ГЭС и Козья тропа</h3><p>Плотина на Катуни и пешая тропа вдоль скал. <span class="todo">уточнить по карте</span></p></div>
+      <div class="it" data-rv><div class="km">≈ 10<small>км</small></div><h3>Ороктойский мост</h3><p>Подвесной мост через Катунь, популярная точка для фото. <span class="todo">уточнить по карте</span></p></div>
+      <div class="it" data-rv><div class="km">≈ 5<small>км</small></div><h3>Музей-усадьба Чороса-Гуркина, с. Анос</h3><p>Дом-музей известного алтайского художника.</p></div>
+      <div class="it" data-rv><div class="km">≈ 15<small>км</small></div><h3>Голубые озёра</h3><p>Небольшие озёра с очень чистой водой.</p></div>
+      <div class="it" data-rv><div class="km">≈ 40<small>км</small></div><h3>Каракольские озёра</h3><p>Цепочка высокогорных озёр. Дорога с подъёмом, лучше ехать с экскурсией.</p></div>
+      <div class="it far" data-rv><div class="km">≈ 60<small>км</small></div><h3>Манжерок и горнолыжка</h3><p>Горнолыжный курорт у озера Манжерок: трассы и подъёмники, летом канатная дорога. <span class="todo">уточнить по карте</span></p></div>
+      <div class="it far" data-rv><div class="km">≈ 96<small>км</small></div><h3>Горно-Алтайск</h3><p>Главный город республики, ближайший большой город.</p></div>
+    </div>
+    <p class="near-note">Расстояния ориентировочные. Время в пути зависит от погоды и загруженности трассы, при бронировании уточните у администратора.</p>
+  </div>
+</section>
+
+<div class="tiles" aria-hidden="true"></div>
+
+<section id="voprosy">
+  <div class="wrap">
+    <h2>Частые вопросы</h2>
+    <div class="faq">
+      <details data-rv open><summary>Работает ли база зимой?</summary><p><b>Да, но зимой открыты не все дома.</b> Зимой принимают гости 4 дома: Дом Семейный, два 2-х комнатных и одна Студия. Дом на берегу, вторая Студия и Стандарты работают с апреля по октябрь.</p></details>
+      <details data-rv><summary>Есть ли кухня в номерах?</summary><p><b>Да, во всех домах и номерах есть кухня.</b> Можно готовить самим, а на территории есть мангальные зоны и беседки.</p></details>
+      <details data-rv><summary>Можно ли заказать баню отдельно от проживания?</summary><p><b>Уточняется у хозяев.</b> Этот ответ мы заполним после согласования условий.</p></details>
+      <details data-rv><summary>Можно ли купить пельмени, вареники и блины с собой?</summary><p><b>Да, замороженными.</b> Хозяйка делает их сама, а мы отдадим упаковки при заезде или выезде. <span class="todo">вес упаковки и цена уточняются</span></p></details>
+      <details data-rv><summary>Куда парковаться?</summary><p><b>Парковка на территории бесплатная.</b></p></details>
+      <details data-rv><summary>Как добраться?</summary><p><b>Село Элекмонар, ул. Советская, 254.</b> От Горно-Алтайска примерно 96 км, от Чемала 6 км. Расстояния до Манжерока, Ороктойского моста, Чемальской ГЭС и других мест — в разделе «<a href="#ryadom">Что рядом</a>».</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="contacts" id="kontakty">
+  <div class="wrap">
+    <h2>Бронирование и вопросы</h2>
+    <p class="lead" style="color:#BFD6CB;max-width:56ch">Позвоните или напишите. Ответим в рабочее время.</p>
+    <div class="cgrid">
+      <div class="cbox" data-rv><small>Телефон</small><a href="tel:+79529061626">+7 952 906-16-26</a></div>
+      <div class="cbox" data-rv><small>Написать в мессенджер</small><div class="msg"><a class="tg" href="https://t.me/+79529061626" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.6l-.4 4.2c.6 0 .9-.3 1.2-.6l2.9-2.7 6 4.4c1.1.6 1.9.3 2.2-1l3.9-18.2c.4-1.6-.6-2.3-1.7-1.9L1.2 9.4c-1.5.6-1.5 1.5-.3 1.9l5.8 1.8L20.2 5c.6-.4 1.2-.2.7.2z"/></svg> Telegram</a><a class="mx" href="https://max.ru/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 6.1 2 11.3c0 2.7 1.2 5.1 3.2 6.8-.1 1.2-.5 2.3-1.3 3.3 1.8 0 3.4-.6 4.6-1.5 1.1.4 2.3.6 3.5.6 5.5 0 10-4.1 10-9.2S17.500 2 12 2zm-4.300 12.200c-.6 0-1-.5-1-1.100V9.800c0-.6.4-1.100 1-1.100.5 0 .8.300 1.100.800l1.700 2.700 1.700-2.700c.3-.5.6-.8 1.100-.8.6 0 1 .5 1 1.100v3.300c0 .6-.4 1.100-1 1.100s-1-.5-1-1.100v-1.300l-.9 1.400c-.2.400-.5.600-.9.600s-.7-.2-.9-.6l-.9-1.400v1.300c0 .6-.4 1.100-1 1.100z"/></svg> MAX</a></div><span class="todo">ссылка на MAX хозяев уточняется</span></div>
+      <div class="cbox" data-rv><small>Адрес</small><a href="https://yandex.ru/maps/org/skay_altay/47851200087/reviews/">с. Элекмонар, ул. Советская, 254</a></div>
+      <div class="cbox" data-rv><small>Отзывы</small><a href="https://2gis.ru/gornoaltaysk/firm/70000001059714356/tab/reviews">2ГИС и Яндекс Карты</a></div>
+    </div>
+    <p class="legal">ИП Пимкин К.А. · <a href="https://www.sky-altai.ru/oferta">Договор-оферта</a> · <a href="https://www.sky-altai.ru/pravila">Правила проживания</a> · <a href="https://tourism.fsa.gov.ru/ru/resorts/hotels/63e7428a-7ccf-11f0-9738-d34784aa4cfb/about-resort">Реестр Ростуризма</a></p>
+  </div>
+</section>
+</main>
+
+<nav class="sticky" aria-label="Быстрые действия"><a class="c" href="tel:+79529061626">Позвонить</a><button class="w" type="button" id="wr" aria-haspopup="true" aria-expanded="false">Написать</button><a class="d" href="book.html">Даты</a></nav>
+
+<script>
+// Галерея номера: клик по маленькому фото меняет большое.
+document.querySelectorAll('.room .gal').forEach(function(g){
+  var main=g.querySelector('.main');
+  g.querySelectorAll('.thumbs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      main.src=b.querySelector('img').src;
+      g.querySelectorAll('.thumbs button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+      b.setAttribute('aria-pressed','true');
+    });
+  });
+});
+// Пример предзаказа и выбора времени бани: только для показа макета.
+document.querySelectorAll('.step').forEach(function(s){
+  var out=s.querySelector('output');
+  s.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    out.value=Math.max(0,Math.min(20,(+out.value||0)+(+b.dataset.d)));
+  });
+});
+document.querySelectorAll('.slots button:not(:disabled)').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.slots button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+    b.setAttribute('aria-pressed','true');
+  });
+});
+</script>
+<script src="fx.js"></script>
+<script>
+// Форма дат в первом экране: передаёт выбранные даты и число гостей на страницу брони.
+function goBook(e){
+  e.preventDefault();
+  var f=e.target, d=f.querySelectorAll('input[type=date]'), g=f.querySelector('select');
+  var q=new URLSearchParams({from:d[0].value,to:d[1].value,guests:g.value});
+  location.href='book.html?'+q.toString();
+  return false;
+}
+</script>
+<script>
+/* территория: вкладки и просмотр фото */
+(function(){
+  var tabs = document.querySelectorAll('.ttabs button'), grids = document.querySelectorAll('.tgrid');
+  tabs.forEach(function(b){ b.addEventListener('click', function(){
+    tabs.forEach(function(x){ x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+    grids.forEach(function(g){ g.hidden = g.getAttribute('data-g') !== b.getAttribute('data-g'); });
+  }); });
+  var lb = document.getElementById('lb'), im = document.getElementById('lbi'), cap = document.getElementById('lbc'), list = [], cur = 0, back = null;
+  function show(i){ cur = (i + list.length) % list.length; var b = list[cur]; im.style.opacity = 0;
+    im.onload = function(){ im.style.opacity = 1; }; im.src = b.querySelector('img').src.replace('/photos/', '/photos/'); im.alt = b.querySelector('img').alt; cap.textContent = im.alt + '  ·  ' + (cur + 1) + ' из ' + list.length; }
+  function open(btn){ var g = btn.parentNode; list = [].slice.call(g.querySelectorAll('.tp')); back = btn; lb.hidden = false; document.body.style.overflow = 'hidden'; show(list.indexOf(btn)); document.getElementById('lbx').focus(); }
+  function close(){ lb.hidden = true; document.body.style.overflow = ''; if (back) back.focus(); }
+  document.querySelectorAll('.tp').forEach(function(b){ b.addEventListener('click', function(){ open(b); }); });
+  document.getElementById('lbx').addEventListener('click', close);
+  document.getElementById('lbp').addEventListener('click', function(){ show(cur - 1); });
+  document.getElementById('lbf').addEventListener('click', function(){ show(cur + 1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){ if (lb.hidden) return; if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') show(cur - 1); else if (e.key === 'ArrowRight') show(cur + 1); });
+  var sx = null; lb.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', function(e){ if (sx == null) return; var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); sx = null; });
+})();
+</script>
+<div class="wmenu" id="wmenu" hidden><small>Выберите мессенджер</small><div class="msg"><a class="tg" href="https://t.me/+79529061626" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.8 15.6l-.4 4.2c.6 0 .9-.3 1.2-.6l2.9-2.7 6 4.4c1.1.6 1.9.3 2.2-1l3.9-18.2c.4-1.6-.6-2.3-1.7-1.9L1.2 9.4c-1.5.6-1.5 1.5-.3 1.9l5.8 1.8L20.2 5c.6-.4 1.2-.2.7.2z"/></svg> Telegram</a><a class="mx" href="https://max.ru/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 6.1 2 11.3c0 2.7 1.2 5.1 3.2 6.8-.1 1.2-.5 2.3-1.3 3.3 1.8 0 3.4-.6 4.6-1.5 1.1.4 2.3.6 3.5.6 5.5 0 10-4.1 10-9.2S17.500 2 12 2zm-4.300 12.200c-.6 0-1-.5-1-1.100V9.800c0-.6.4-1.100 1-1.100.5 0 .8.300 1.100.800l1.700 2.700 1.700-2.700c.3-.5.6-.8 1.100-.8.6 0 1 .5 1 1.100v3.300c0 .6-.4 1.100-1 1.100s-1-.5-1-1.100v-1.300l-.9 1.400c-.2.400-.5.600-.9.600s-.7-.2-.9-.6l-.9-1.400v1.300c0 .6-.4 1.100-1 1.100z"/></svg> MAX</a></div></div>
+<script>
+/* «Написать»: выбор мессенджера */
+(function(){
+  var b = document.getElementById('wr'), m = document.getElementById('wmenu'); if (!b || !m) return;
+  function set(o){ m.hidden = !o; b.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+  b.addEventListener('click', function(e){ e.stopPropagation(); set(m.hidden); });
+  document.addEventListener('click', function(e){ if (!m.hidden && !m.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') set(false); });
+})();
+</script>
+<script src="dog.js" defer></script>
+</body>
+</html>
