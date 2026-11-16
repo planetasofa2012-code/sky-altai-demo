@@ -4,19 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Скай Алтай: новая система бронирования (демо для владельцев)</title>
+<title>Скай Алтай: новая система бронирования. Ролик, демо и предложение</title>
 <style>
 *{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
 body{font-family:Manrope,Segoe UI,Arial,sans-serif;background:#14221C;color:#F3EFE6;line-height:1.55}
-main{max-width:900px;margin:0 auto;padding:36px 20px 60px}
+main{max-width:900px;margin:0 auto;padding:36px 20px 70px}
 img.logo{height:84px;display:block;margin:0 auto 22px}
 h1{font-size:clamp(26px,5vw,40px);text-align:center;line-height:1.2}
-.sub{text-align:center;color:#BFE0D6;margin:10px 0 28px;font-size:18px}
+.sub{text-align:center;color:#BFE0D6;margin:10px 0 22px;font-size:18px}
+nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+nav a{color:#F3EFE6;text-decoration:none;border:1px solid #3c5a4c;border-radius:999px;padding:8px 16px;font-weight:700;font-size:15px}
+nav a:hover{background:#1d3329}
+section{margin-top:44px;scroll-margin-top:16px}
+h2{font-size:24px;margin-bottom:6px}
+h2 span{display:inline-block;background:#E39B2F;color:#14221C;border-radius:999px;width:32px;height:32px;line-height:32px;text-align:center;font-size:17px;margin-right:10px}
+.lead{color:#BFE0D6;margin-bottom:16px}
+h3{font-size:18px;margin:24px 0 8px;color:#E9C98A}
 video{width:100%;border-radius:14px;background:#000;box-shadow:0 12px 40px rgba(0,0,0,.45)}
-.hello{background:#1d3329;border-radius:14px;padding:22px 24px;margin-top:28px}
+.hello{background:#1d3329;border-radius:14px;padding:22px 24px;margin-top:22px}
 .hello p+p{margin-top:12px}
-h2{font-size:20px;margin:30px 0 10px;color:#E9C98A}
 ul{padding-left:22px}li{margin:6px 0}
+.btn{display:inline-block;background:#E39B2F;color:#14221C;text-decoration:none;font-weight:800;border-radius:12px;padding:14px 26px;font-size:18px}
+.btn.off{background:#3c5a4c;color:#BFE0D6;cursor:default}
+.card{background:#1d3329;border-radius:14px;padding:20px 24px;margin-top:14px}
+.price{font-size:30px;font-weight:800;color:#E9C98A}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
 .note{color:#9db8ad;font-size:14px;margin-top:30px}
 </style>
 </head>
@@ -24,30 +38,96 @@ ul{padding-left:22px}li{margin:6px 0}
 <main>
 <img class="logo" src="logo.png" alt="Скай Алтай">
 <h1>Новая система бронирования для «Скай Алтай»</h1>
-<p class="sub">Ролик на 1,5 минуты: от сайта гостя до приложения администратора</p>
+<p class="sub">Ирина, Константин, здравствуйте! Здесь по порядку: ролик, демо и предложение.</p>
+<nav>
+<a href="#video">1. Ролик</a>
+<a href="#demo">2. Демо-сайт</a>
+<a href="#offer">3. Предложение</a>
+</nav>
+
+<section id="video">
+<h2><span>1</span>Ролик на 1,5 минуты</h2>
+<p class="lead">От сайта гостя до приложения администратора. Данные в ролике вымышленные, фото, тексты, цены и расстояния взяты с вашего сайта.</p>
 <video controls preload="metadata" poster="poster.jpg" playsinline>
 <source src="demo.mp4" type="video/mp4">
 <track kind="subtitles" srclang="ru" label="Русские субтитры" src="demo.ru.vtt" default>
 </video>
-<div class="hello">
-<p><b>Здравствуйте!</b></p>
-<p>Я подготовил для вас демонстрацию того, как могут бронироваться ваши домики, баня и домашняя заморозка, и как вы увидите всё это в телефоне. Данные в ролике вымышленные, а фото, тексты, цены и расстояния взяты с вашего сайта.</p>
-<p>Посмотрите, пожалуйста, ролик, а потом давайте обсудим, что в нём нужно поменять и что добавить именно для вас.</p>
-</div>
-<h2>Что вы увидите в ролике</h2>
+<h3>Что вы увидите</h3>
 <ul>
 <li>Сайт: дома с ценами, территория, баня, расстояния до Чемала, Манжерока и других мест, собака-помощник Стрелка.</li>
 <li>Страница брони: гость выбирает даты и дом, добавляет баню и заморозку, отправляет одну заявку.</li>
 <li>Приложение администратора: заявки, шахматка по домам, расписание бани, сборка заморозки.</li>
-<li>Настройки для хозяев: цены в разные периоды и минимальный срок брони в высокий сезон, включаются вручную.</li>
+<li>Настройки для вас: цены в разные периоды и минимальный срок брони в высокий сезон, включаются вручную.</li>
 </ul>
-<h2>Что будет дальше</h2>
+</section>
+
+<section id="demo">
+<h2><span>2</span>Демо-сайт: потрогать самим</h2>
+<p class="lead">Живая версия с вымышленными данными: можно выбрать даты, добавить баню и заморозку, отправить заявку и увидеть её в приложении администратора. Настоящих броней она не принимает.</p>
+<div class="card"><p><b>Покажу на созвоне с экрана</b>, а ссылку для самостоятельной проверки пришлю отдельным сообщением, как только размещу демо на сервере.</p></div>
+</section>
+
+<section id="offer">
+<h2><span>3</span>Предложение</h2>
+<p class="lead">Начинаем с первого этапа. Остальное подключаем по мере необходимости.</p>
+
+<div class="card">
+<h3 style="margin-top:0">Первый этап: запуск</h3>
 <ul>
-<li>Оплата онлайн.</li>
-<li>Сообщения гостям в Telegram и MAX.</li>
-<li>Свой домен sky-altai.ru.</li>
+<li><b>Сайт на вашем домене sky-altai.ru</b> с бронированием: дома, шоурум, территория, баня, заморозка, «что рядом», вопросы, собака-помощник.</li>
+<li><b>Приложение администратора на телефон</b>: заявки, шахматка по домам, расписание бани, сборка заморозки, цены по периодам, минимальный срок брони.</li>
+<li><b>Уведомления</b> вам и гостям в MAX или Telegram.</li>
+<li><b>Ваш домен sky-altai.ru остаётся у вас.</b> Когда сайт будет готов, мы просто переставим домен на новый сайт: покупать и переоформлять ничего не нужно. Старые адреса перенаправим, чтобы не потерять позиции в поиске, а старый сайт ещё неделю-две останется запасным.</li>
+<li><b>Обучение</b> на 1–2 часа и короткая инструкция. Первые недели можно дублировать брони в тетради.</li>
 </ul>
-<p class="note">Это демонстрационная версия, она не принимает настоящих броней. Если в ролике что-то неточно (цены, названия, расстояния), напишите, поправим.</p>
+<p style="margin-top:14px">Стоимость первого этапа: <span class="price">10 000 ₽</span></p>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3 style="margin-top:0">Потом, по желанию</h3>
+<ul>
+<li>Онлайн-оплата предоплаты с чеками</li>
+<li>ИИ-помощник на входящие звонки</li>
+<li>Яндекс Путешествия и Островок без двойных броней</li>
+<li>Съёмка 360° комнат и видео бани</li>
+<li>Отчёты для бухгалтера</li>
+</ul>
+</div>
+<div class="card">
+<h3 style="margin-top:0">Поддержка после запуска</h3>
+<ul>
+<li>Хостинг в России, резервные копии, SSL</li>
+<li>Мелкие правки: цены, тексты, фото</li>
+<li>Ответ в течение рабочего дня</li>
+</ul>
+<p style="margin-top:10px;color:#BFE0D6">Стоимость поддержки назову отдельно после запуска. Домен, хостинг и SMS оплачиваете вы напрямую.</p>
+</div>
+</div>
+
+<h3>Как работаем</h3>
+<ul>
+<li><b>1.</b> Вы смотрите ролик и демо, говорите, что поменять.</li>
+<li><b>2.</b> Я настраиваю под ваши цены и правила, вы проверяете на тестовом адресе.</li>
+<li><b>3.</b> Обучение, перенос домена, запуск.</li>
+<li><b>4.</b> Первые недели на связи: исправляем всё, что всплывёт.</li>
+</ul>
+
+<h3>Что нужно от вас</h3>
+<ul>
+<li>Ответы: сколько берёте предоплату и на сколько держите бронь, цена и часы бани, вес и цена заморозки.</li>
+<li>Доступ к управлению доменом, чтобы переставить его в день запуска (лучше приглашением, а не паролем).</li>
+<li>Оригиналы фото и видео с дрона, ссылка на ваш MAX.</li>
+</ul>
+
+<h3>Ваши данные и данные гостей</h3>
+<ul>
+<li>Все аккаунты (домен, хостинг, платежи, боты) оформлены на вас, я приглашён как исполнитель.</li>
+<li>Данные гостей хранятся на серверах в России. Берём только ФИО, телефон и возраст тех, кто на доп. месте.</li>
+</ul>
+</section>
+
+<p class="note">Это демонстрационная версия, она не принимает настоящих броней. Если в ролике или предложении что-то неточно, напишите, поправим.</p>
 </main>
 </body>
 </html>
