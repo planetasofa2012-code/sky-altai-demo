@@ -1,4 +1,4 @@
-/* Белая собака-помощник «Стрелка» (такая собака есть у хозяев базы).
+/* Белая собака-помощник «Белка» (такая собака есть у хозяев базы).
    — на компьютере бежит за курсором мыши и останавливается рядом;
    — на телефоне и при «меньше анимации» сидит в углу (не бегает);
    — по нажатию открывает чат: отвечает на вопросы гостей по заготовленным ответам (без ИИ).
@@ -8,7 +8,7 @@
   'use strict';
   if (window.__skyDog) return; window.__skyDog = true;
 
-  var NAME = 'Стрелка';
+  var NAME = 'Белка';
   var PHONE = '+7 952 906-16-26', TEL = 'tel:+79529061626';
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
